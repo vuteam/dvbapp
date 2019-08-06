@@ -59,9 +59,9 @@ ledsetup = LEDSetup()
 class LEDBrightnessSetup(Screen,ConfigListScreen):
 	skin = 	"""
 		<screen position="center,center" size="560,300" title="LED Brightness Setup">
-			<ePixmap pixmap="skin_default/buttons/red.png" position="40,10" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="210,10" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/yellow.png" position="380,10" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/red.png" position="40,10" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/green.png" position="210,10" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/yellow.png" position="380,10" size="140,40" alphatest="on" />
 
 			<widget source="key_red" render="Label" position="40,10" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" foregroundColor="#ffffff" transparent="1" />
 			<widget source="key_green" render="Label" position="210,10" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" foregroundColor="#ffffff" transparent="1" />

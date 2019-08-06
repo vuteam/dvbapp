@@ -9,10 +9,10 @@ import skin
 #Now there is a list of pictures instead of one...
 entryPicture = {}
 
-entryPicture[IMG_BLACKSERVICE] = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/lock.png"))
-entryPicture[IMG_BLACKBOUQUET] = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/lockBouquet.png"))
-entryPicture[IMG_WHITESERVICE] = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/unlock.png"))
-entryPicture[IMG_WHITEBOUQUET] = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/unlockBouquet.png"))
+entryPicture[IMG_BLACKSERVICE] = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "icons/lock.png"))
+entryPicture[IMG_BLACKBOUQUET] = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "icons/lockBouquet.png"))
+entryPicture[IMG_WHITESERVICE] = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "icons/unlock.png"))
+entryPicture[IMG_WHITEBOUQUET] = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "icons/unlockBouquet.png"))
 
 def ParentalControlEntryComponent(service, name, protectionType):
 	locked = protectionType[0]

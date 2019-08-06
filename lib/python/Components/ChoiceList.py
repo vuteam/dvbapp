@@ -13,7 +13,7 @@ def ChoiceEntryComponent(key = "", text = ["--"]):
 		x, y, w, h = skin.parameters.get("ChoicelistName",(45, 0, 800, 25))
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, RT_HALIGN_LEFT, text[0]))
 	
-		png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/buttons/key_" + key + ".png"))
+		png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "buttons/key_" + key + ".png"))
 		if png is not None:
 			x, y, w, h = skin.parameters.get("ChoicelistIcon",(5, 0, 35, 25))
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, x, y, w, h, png))

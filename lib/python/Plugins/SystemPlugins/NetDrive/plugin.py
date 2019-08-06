@@ -43,10 +43,10 @@ def isempty(data):
 class NetDrivebrowser(Screen):
 	skin = 	"""
 		<screen name="NetDrivebrowser" position="center,120" size="600,390" title="NetDrive Setup > Mount Point">
-			<ePixmap pixmap="skin_default/buttons/red.png" position="5,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="155,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/yellow.png" position="305,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/blue.png" position="455,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/red.png" position="5,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/green.png" position="155,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/yellow.png" position="305,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/blue.png" position="455,0" size="140,40" alphatest="on" />
 
 			<widget source="key_red" render="Label" position="5,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" foregroundColor="#ffffff" transparent="1" />
 			<widget source="key_green" render="Label" position="155,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" foregroundColor="#ffffff" transparent="1" />
@@ -122,10 +122,10 @@ class NetDrivebrowser(Screen):
 class NetDriveSetup(ConfigListScreen, Screen):
 	skin = 	"""
 		<screen name="NetDriveSetup" position="center,120" size="600,390" title="Network Drive Setup">
-			<ePixmap pixmap="skin_default/buttons/red.png" position="5,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="155,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/yellow.png" position="305,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/blue.png" position="455,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/red.png" position="5,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/green.png" position="155,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/yellow.png" position="305,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/blue.png" position="455,0" size="140,40" alphatest="on" />
 
 			<widget source="key_red" render="Label" position="5,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" foregroundColor="#ffffff" transparent="1" />
 			<widget source="key_green" render="Label" position="155,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" foregroundColor="#ffffff" transparent="1" />
@@ -134,7 +134,7 @@ class NetDriveSetup(ConfigListScreen, Screen):
 
 			<widget name="config" position="5,70" size="590,250" scrollbarMode="showOnDemand" />
 			<widget name="introduction" position="5,335" size="590,60" font="Regular;18" halign="center" />
-			<widget name="VKeyIcon" pixmap="skin_default/buttons/key_text.png" position="565,365" zPosition="10" size="35,25" transparent="1" alphatest="on" />
+			<widget name="VKeyIcon" pixmap="buttons/key_text.png" position="565,365" zPosition="10" size="35,25" transparent="1" alphatest="on" />
 		</screen>
 		"""
 	def __init__(self, session):

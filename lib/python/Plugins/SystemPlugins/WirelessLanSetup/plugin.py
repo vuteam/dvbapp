@@ -19,12 +19,12 @@ SHOW_HIDDEN_NETWORK = False
 class WlanScan(Screen, HelpableScreen):
 	skin = 	"""
 		<screen position="center,center" size="510,400" title="Wireless Network AP Scan..." >
-			<ePixmap pixmap="skin_default/div-h.png" position="0,350" zPosition="1" size="560,2" />
-			<ePixmap pixmap="skin_default/border_menu.png" position="10,10" zPosition="1" size="250,300" transparent="1" alphatest="on" />
+			<ePixmap pixmap="div-h.png" position="0,350" zPosition="1" size="560,2" />
+			<ePixmap pixmap="border_menu.png" position="10,10" zPosition="1" size="250,300" transparent="1" alphatest="on" />
 
-			<ePixmap pixmap="skin_default/buttons/red.png" position="10,360" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="185,360" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/blue.png" position="360,360" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/red.png" position="10,360" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/green.png" position="185,360" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/blue.png" position="360,360" size="140,40" alphatest="on" />
 
 			<widget source="key_red" render="Label" position="10,360" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" foregroundColor="#ffffff" transparent="1" />
 			<widget source="key_green" render="Label" position="185,360" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" foregroundColor="#ffffff" transparent="1" />
@@ -207,7 +207,7 @@ class WlanStatus(Screen):
 		<screen position="center,center" size="510,400" title="Wireless Network Status..." >
 			<widget source="status" render="Label" position="5,15" size="500,350" font="Regular;18" zPosition="1" />
 
-			<ePixmap pixmap="skin_default/buttons/red.png" position="185,360" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/red.png" position="185,360" size="140,40" alphatest="on" />
 			<widget source="key_red" render="Label" position="185,360" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" foregroundColor="#ffffff" transparent="1" />
 		</screen>
 		"""

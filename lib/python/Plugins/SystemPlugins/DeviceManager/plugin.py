@@ -88,15 +88,15 @@ class DeviceManagerConfiguration(Screen, ConfigListScreen):
 class DeviceManager(Screen):
 	skin = """
 		<screen position="center,center" size="590,350" title="DeviceManager">
-			<ePixmap pixmap="skin_default/buttons/red.png" position="20,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="160,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/yellow.png" position="300,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/blue.png" position="440,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/red.png" position="20,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/green.png" position="160,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/yellow.png" position="300,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/blue.png" position="440,0" size="140,40" alphatest="on" />
 			<widget name="key_red" position="20,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" foregroundColor="#ffffff" backgroundColor="#9f1313" transparent="1" />
 			<widget name="key_green" position="160,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" foregroundColor="#ffffff" backgroundColor="#1f771f" transparent="1" />
 			<widget name="key_yellow" position="300,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" foregroundColor="#ffffff" backgroundColor="#a08500" transparent="1" />
 			<widget name="key_blue" position="440,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" foregroundColor="#ffffff" backgroundColor="#18188b" transparent="1" />
-			<ePixmap pixmap="skin_default/div-h.png" position="0,48" size="590,2" alphatest="on" />
+			<ePixmap pixmap="div-h.png" position="0,48" size="590,2" alphatest="on" />
 			<widget source="menu" render="Listbox" position="0,48" size="590,350" scrollbarMode="showOnDemand">
 				<convert type="TemplatedMultiContent">
 				{"templates":
@@ -179,8 +179,8 @@ class DeviceManager(Screen):
 		self.showDeviceList()
 
 	def loadIcon(self):
-		self.icon_button_green = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/buttons/button_green.png"))
-		self.divpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/div-h.png"))
+		self.icon_button_green = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "buttons/button_green.png"))
+		self.divpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "div-h.png"))
 
 	def selectionChanged(self):
 		if self.currList == "partitions":
@@ -1221,10 +1221,10 @@ deviceinfo = DeviceInfo()
 class MountpointBrowser(Screen):
 	skin="""
 		<screen name="MountpointBrowser" position="center,120" size="670,500" title="Select mountpoint">
-			<ePixmap pixmap="skin_default/buttons/red.png" position="20,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="180,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/yellow.png" position="340,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/blue.png" position="500,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/red.png" position="20,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/green.png" position="180,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/yellow.png" position="340,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/blue.png" position="500,0" size="140,40" alphatest="on" />
 			<widget source="key_red" render = "Label" position="20,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" foregroundColor="#ffffff" backgroundColor="#9f1313" transparent="1" />
 			<widget source="key_green" render = "Label" position="180,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" foregroundColor="#ffffff" backgroundColor="#1f771f" transparent="1" />
 			<widget source="key_yellow" render = "Label" position="340,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" foregroundColor="#ffffff" backgroundColor="#a08500" transparent="1" />
@@ -1308,9 +1308,9 @@ class MessageBoxConfirm(MessageBox):
 	skin = 	"""
 		<screen position="center,center" size="620,10" title="Message">
 			<widget name="text" position="65,8" size="420,0" font="Regular;20" />
-			<widget name="ErrorPixmap" pixmap="skin_default/icons/input_error.png" position="5,5" size="53,53" alphatest="blend" />
-			<widget name="QuestionPixmap" pixmap="skin_default/icons/input_question.png" position="5,5" size="53,53" alphatest="blend" />
-			<widget name="InfoPixmap" pixmap="skin_default/icons/input_info.png" position="5,5" size="53,53" alphatest="blend" />
+			<widget name="ErrorPixmap" pixmap="icons/input_error.png" position="5,5" size="53,53" alphatest="blend" />
+			<widget name="QuestionPixmap" pixmap="icons/input_question.png" position="5,5" size="53,53" alphatest="blend" />
+			<widget name="InfoPixmap" pixmap="icons/input_info.png" position="5,5" size="53,53" alphatest="blend" />
 			<widget name="list" position="100,100" size="380,375" transparent="1" />
 			<applet type="onLayoutFinish">
 # this should be factored out into some helper code, but currently demonstrates applets.

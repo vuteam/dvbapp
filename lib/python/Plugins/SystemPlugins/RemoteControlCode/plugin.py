@@ -54,8 +54,8 @@ class RemoteControlCodeInit:
 class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 	skin = 	"""
 		<screen position="center,center" size="400,250" title="Remote Control System Code Setting" >
-			<ePixmap pixmap="skin_default/buttons/red.png" position="30,10" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="230,10" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/red.png" position="30,10" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/green.png" position="230,10" size="140,40" alphatest="on" />
 
 			<widget source="key_red" render="Label" position="30,10" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" foregroundColor="#ffffff" transparent="1" />
 			<widget source="key_green" render="Label" position="230,10" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" foregroundColor="#ffffff" transparent="1" />
@@ -146,9 +146,9 @@ class MessageBoxConfirmCode(MessageBox):
 	skin = 	"""
 		<screen position="center,center" size="620,10" title="Message">
 			<widget name="text" position="65,8" size="420,0" font="Regular;20" />
-			<widget name="ErrorPixmap" pixmap="skin_default/icons/input_error.png" position="5,5" size="53,53" alphatest="blend" />
-			<widget name="QuestionPixmap" pixmap="skin_default/icons/input_question.png" position="5,5" size="53,53" alphatest="blend" />
-			<widget name="InfoPixmap" pixmap="skin_default/icons/input_info.png" position="5,5" size="53,53" alphatest="blend" />
+			<widget name="ErrorPixmap" pixmap="icons/input_error.png" position="5,5" size="53,53" alphatest="blend" />
+			<widget name="QuestionPixmap" pixmap="icons/input_question.png" position="5,5" size="53,53" alphatest="blend" />
+			<widget name="InfoPixmap" pixmap="icons/input_info.png" position="5,5" size="53,53" alphatest="blend" />
 			<widget name="list" position="100,100" size="380,375" transparent="1" />
 			<applet type="onLayoutFinish">
 # this should be factored out into some helper code, but currently demonstrates applets.

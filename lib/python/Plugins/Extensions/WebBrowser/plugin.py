@@ -100,7 +100,7 @@ class VuPlayer(Screen, InfoBarNotifications):
 			<ePixmap pixmap="%s" position="0,0" zPosition="-1" size="455,53" />
 			<ePixmap pixmap="%s" position="40,23" size="30,13" alphatest="on" />
 
-			<widget source="session.CurrentService" render="PositionGauge" position="80,25" size="220,10" zPosition="2" pointer="skin_default/position_pointer.png:540,0" transparent="1" foregroundColor="#20224f">
+			<widget source="session.CurrentService" render="PositionGauge" position="80,25" size="220,10" zPosition="2" pointer="position_pointer.png:540,0" transparent="1" foregroundColor="#20224f">
 				<convert type="ServicePosition">Gauge</convert>
 			</widget>
 			
@@ -480,8 +480,8 @@ class VuPlayerService:
 class BrowserLauncher(ConfigListScreen, Screen):
 	skin=   """
 		<screen position="center,center" size="623,300" title="Web Browser">
-			<ePixmap pixmap="skin_default/buttons/red.png" position="10,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="158,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/red.png" position="10,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/green.png" position="158,0" size="140,40" alphatest="on" />
 
 			<widget source="key_red" render="Label" position="10,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" foregroundColor="#ffffff" transparent="1" />
 			<widget source="key_green" render="Label" position="158,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" foregroundColor="#ffffff" transparent="1" />

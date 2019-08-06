@@ -79,7 +79,7 @@ class TimerList(HTMLComponent, GUIComponent, object):
 
 		if timer.disabled:
 			iconPosX = width * 490 / 740
-			png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/redx.png"))
+			png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/redx.png"))
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, iconPosX, 5, 40, 40, png))
 		return res
 

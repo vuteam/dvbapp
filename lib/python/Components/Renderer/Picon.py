@@ -51,7 +51,7 @@ class Picon(Renderer):
 						if fileExists(tmp):
 							pngname = tmp
 						else:
-							pngname = resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/picon_default.png")
+							pngname = resolveFilename(SCOPE_SKIN_IMAGE, "picon_default.png")
 					self.nameCache["default"] = pngname
 			if self.pngname != pngname:
 				self.instance.setPixmapFromFile(pngname)

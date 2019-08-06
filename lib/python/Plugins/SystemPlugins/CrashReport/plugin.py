@@ -81,17 +81,17 @@ def loadConfig():
 class CrashlogReportConfiguration(Screen, ConfigListScreen):
 	skin = 	"""
 		<screen position="center,120" size="560,420" title="CrashlogReport Settings" >
-			<ePixmap pixmap="skin_default/buttons/red.png" position="110,10" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="310,10" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/red.png" position="110,10" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/green.png" position="310,10" size="140,40" alphatest="on" />
 
 			<widget source="key_red" render="Label" position="110,10" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" foregroundColor="#ffffff" transparent="1" />
 			<widget source="key_green" render="Label" position="310,10" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" foregroundColor="#ffffff" transparent="1" />
 
 			<widget name="config" zPosition="2" position="5,70" size="550,300" scrollbarMode="showOnDemand" transparent="1" />
-			<ePixmap pixmap="skin_default/div-h.png" position="0,360" zPosition="10" size="560,2" transparent="1" alphatest="on" />
+			<ePixmap pixmap="div-h.png" position="0,360" zPosition="10" size="560,2" transparent="1" alphatest="on" />
 			<widget source="status" render="Label" position="10,370" size="540,40" zPosition="10" font="Regular;20" halign="center" valign="center" backgroundColor="#25062748" transparent="1"/>
-			<widget name="VKeyIcon" pixmap="skin_default/buttons/key_text.png" position="10,390" zPosition="10" size="35,25" transparent="1" alphatest="on" />
-			<widget name="HelpWindow" pixmap="skin_default/vkey_icon.png" position="160,350" zPosition="1" size="1,1" transparent="1" alphatest="on" />
+			<widget name="VKeyIcon" pixmap="buttons/key_text.png" position="10,390" zPosition="10" size="35,25" transparent="1" alphatest="on" />
+			<widget name="HelpWindow" pixmap="vkey_icon.png" position="160,350" zPosition="1" size="1,1" transparent="1" alphatest="on" />
 		</screen>
 		"""
 
