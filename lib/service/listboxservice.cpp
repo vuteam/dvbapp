@@ -5,6 +5,8 @@
 #include <lib/dvb/pmt.h>
 #include <lib/python/connections.h>
 
+ePyObject eListboxServiceContent::m_GetPiconNameFunc;
+
 void eListboxServiceContent::addService(const eServiceReference &service, bool beforeCurrent)
 {
 	if (beforeCurrent && m_size)
@@ -15,7 +17,7 @@ void eListboxServiceContent::addService(const eServiceReference &service, bool b
 	{
 		++m_cursor_number;
 		if (m_listbox)
-			m_listbox->entryAdded(m_cursor_number-1);
+			m_listbox->entryAdded(cursorResolve(m_cursor_number-1));
 	}
 	else
 	{
@@ -35,15 +37,15 @@ void eListboxServiceContent::removeCurrent()
 			if (m_size)
 			{
 				--m_cursor_number;
-				m_listbox->entryRemoved(m_cursor_number+1);
+				m_listbox->entryRemoved(cursorResolve(m_cursor_number+1));
 			}
 			else
-				m_listbox->entryRemoved(m_cursor_number);
+				m_listbox->entryRemoved(cursorResolve(m_cursor_number));
 		}
 		else
 		{
 			m_list.erase(m_cursor++);
-			m_listbox->entryRemoved(m_cursor_number);
+			m_listbox->entryRemoved(cursorResolve(m_cursor_number));
 		}
 	}
 }
@@ -88,7 +90,7 @@ void eListboxServiceContent::setCurrent(const eServiceReference &ref)
 			break;
 		}
 	if (m_listbox)
-		m_listbox->moveSelectionTo(index);
+		m_listbox->moveSelectionTo(cursorResolve(index));
 }
 
 void eListboxServiceContent::getCurrent(eServiceReference &ref)
@@ -181,7 +183,7 @@ int eListboxServiceContent::getPrevMarkerPos()
 		if (i->flags & eServiceReference::isMarker)
 			break;
 	}
-	return index;
+	return cursorResolve(index);
 }
 
 int eListboxServiceContent::getNextMarkerPos()
@@ -197,7 +199,7 @@ int eListboxServiceContent::getNextMarkerPos()
 		if (i->flags & eServiceReference::isMarker)
 			break;
 	}
-	return index;
+	return cursorResolve(index);
 }
 
 void eListboxServiceContent::initMarked()
@@ -209,14 +211,14 @@ void eListboxServiceContent::addMarked(const eServiceReference &ref)
 {
 	m_marked.insert(ref);
 	if (m_listbox)
-		m_listbox->entryChanged(lookupService(ref));
+		m_listbox->entryChanged(cursorResolve(lookupService(ref)));
 }
 
 void eListboxServiceContent::removeMarked(const eServiceReference &ref)
 {
 	m_marked.erase(ref);
 	if (m_listbox)
-		m_listbox->entryChanged(lookupService(ref));
+		m_listbox->entryChanged(cursorResolve(lookupService(ref)));
 }
 
 int eListboxServiceContent::isMarked(const eServiceReference &ref)
@@ -302,7 +304,7 @@ void eListboxServiceContent::sort()
 DEFINE_REF(eListboxServiceContent);
 
 eListboxServiceContent::eListboxServiceContent()
-	:m_visual_mode(visModeSimple), m_size(0), m_current_marked(false), m_numberoffset(0), m_itemheight(25)
+	:m_visual_mode(visModeSimple), m_size(0), m_current_marked(false), m_numberoffset(0), m_itemheight(25), m_hide_number_marker(false)
 {
 	memset(m_color_set, 0, sizeof(m_color_set));
 	cursorHome();
@@ -332,15 +334,23 @@ void eListboxServiceContent::cursorHome()
 			std::iter_swap(m_cursor--, m_cursor);
 			--m_cursor_number;
 			if (m_listbox && m_cursor_number)
-				m_listbox->entryChanged(m_cursor_number);
+				m_listbox->entryChanged(cursorResolve(m_cursor_number));
 		}
 	}
 	else
 	{
 		m_cursor = m_list.begin();
 		m_cursor_number = 0;
+		while (m_cursor != m_list.end())
+		{
+			if (!((m_hide_number_marker && (m_cursor->flags & eServiceReference::isNumberedMarker)) || (m_cursor->flags & eServiceReference::isInvisible)))
+				break;
+			m_cursor++;
+			m_cursor_number++;
+		}
 	}
 }
+	
 
 void eListboxServiceContent::cursorEnd()
 {
@@ -354,7 +364,7 @@ void eListboxServiceContent::cursorEnd()
 			{
 				std::iter_swap(m_cursor, prev);
 				if ( m_listbox )
-					m_listbox->entryChanged(m_cursor_number);
+					m_listbox->entryChanged(cursorResolve(m_cursor_number));
 			}
 		}
 	}
@@ -372,7 +382,7 @@ int eListboxServiceContent::setCurrentMarked(bool state)
 
 	if (state != prev && m_listbox)
 	{
-		m_listbox->entryChanged(m_cursor_number);
+		m_listbox->entryChanged(cursorResolve(m_cursor_number));
 		if (!state)
 		{
 			if (!m_lst)
@@ -419,10 +429,11 @@ int eListboxServiceContent::cursorMove(int count)
 			{
 				std::iter_swap(prev_it, m_cursor);
 				if ( m_listbox && prev != m_cursor_number && last != m_cursor_number )
-					m_listbox->entryChanged(m_cursor_number);
+					m_listbox->entryChanged(cursorResolve(m_cursor_number));
 			}
 			++m_cursor_number;
-			--count;
+			if (!(m_hide_number_marker && m_cursor->flags & eServiceReference::isNumberedMarker) && !(m_cursor->flags & eServiceReference::isInvisible))
+			        --count;
 	}
 	} else if (count < 0)
 	{
@@ -433,10 +444,11 @@ int eListboxServiceContent::cursorMove(int count)
 			{
 				std::iter_swap(prev_it, m_cursor);
 				if ( m_listbox && prev != m_cursor_number && last != m_cursor_number )
-					m_listbox->entryChanged(m_cursor_number);
+					m_listbox->entryChanged(cursorResolve(m_cursor_number));
 			}
 			--m_cursor_number;
-			++count;
+			if (!(m_hide_number_marker && m_cursor->flags & eServiceReference::isNumberedMarker) && !(m_cursor->flags & eServiceReference::isInvisible))
+			        ++count;
 		}
 	}
 	return 0;
@@ -454,9 +466,25 @@ int eListboxServiceContent::cursorSet(int n)
 	return 0;
 }
 
+int eListboxServiceContent::cursorResolve(int cursorPosition)
+{
+	int strippedCursor = 0;
+	int count = 0;
+	for (list::iterator i(m_list.begin()); i != m_list.end(); ++i)
+	{
+		if (count == cursorPosition)
+			break;
+		count++;
+		if (m_hide_number_marker && i->flags & eServiceReference::isNumberedMarker || i->flags & eServiceReference::isInvisible)
+			continue;
+		strippedCursor++;
+	}
+	return strippedCursor;
+}
+
 int eListboxServiceContent::cursorGet()
 {
-	return m_cursor_number;
+	return cursorResolve(m_cursor_number);
 }
 
 void eListboxServiceContent::cursorSave()
@@ -474,7 +502,15 @@ void eListboxServiceContent::cursorRestore()
 
 int eListboxServiceContent::size()
 {
-	return m_size;
+	int size = 0;
+	for (list::iterator i(m_list.begin()); i != m_list.end(); ++i)
+	{
+		if (m_hide_number_marker && i->flags & eServiceReference::isNumberedMarker || i->flags & eServiceReference::isInvisible)
+			continue;
+		size++;
+	}
+
+	return size;
 }
 	
 void eListboxServiceContent::setSize(const eSize &size)
@@ -482,6 +518,20 @@ void eListboxServiceContent::setSize(const eSize &size)
 	m_itemsize = size;
 	if (m_visual_mode == visModeSimple)
 		setVisualMode(m_visual_mode);
+}
+
+void eListboxServiceContent::setHideNumberMarker(bool doHide)
+{
+	m_hide_number_marker = doHide;
+}
+
+void eListboxServiceContent::setGetPiconNameFunc(ePyObject func)
+{
+	if (m_GetPiconNameFunc)
+		Py_DECREF(m_GetPiconNameFunc);
+	m_GetPiconNameFunc = func;
+	if (m_GetPiconNameFunc)
+		Py_INCREF(m_GetPiconNameFunc);
 }
 
 void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const ePoint &offset, int selected)
@@ -669,6 +719,45 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 					m_element_position[celServiceInfo].setTop(area.top());
 					m_element_position[celServiceInfo].setWidth(area.width()-(name_width+xoffs));
 					m_element_position[celServiceInfo].setHeight(area.height());
+				        //picon stuff
+					if (isPlayable && PyCallable_Check(m_GetPiconNameFunc))
+					{
+						eRect area = m_element_position[celServiceInfo];
+							/* PIcons are usually about 100:60. Make it a
+							 * bit wider in case the icons are diffently
+							 * shaped, and to add a bit of margin between
+							 * icon and text. */
+						const int iconWidth = area.height() * 9 / 5;
+						m_element_position[celServiceInfo].setLeft(area.left() + iconWidth + 10);
+						m_element_position[celServiceInfo].setWidth(area.width() - (iconWidth + 10));
+						area = m_element_position[celServiceName];
+						xoffs += iconWidth;
+						xoffs += 10;
+						ePyObject pArgs = PyTuple_New(1);
+						PyTuple_SET_ITEM(pArgs, 0, PyString_FromString(ref.toString().c_str()));
+						ePyObject pRet = PyObject_CallObject(m_GetPiconNameFunc, pArgs);
+						Py_DECREF(pArgs);
+						if (pRet)
+						{
+							if (PyString_Check(pRet))
+							{
+								std::string piconFilename = PyString_AS_STRING(pRet);
+								if (!piconFilename.empty())
+								{
+									ePtr<gPixmap> piconPixmap;
+									loadPNG(piconPixmap, piconFilename.c_str());
+									if (piconPixmap)
+									{
+										area.moveBy(offset);
+										painter.clip(area);
+										painter.blitScale(piconPixmap, eRect(area.left(), area.top(), iconWidth, area.height()), area, gPainter::BT_ALPHATEST);
+										painter.clippop();
+									}
+								}
+							}
+							Py_DECREF(pRet);
+						}
+					}
 				}
 
 				if (flags & gPainter::RT_HALIGN_RIGHT)
