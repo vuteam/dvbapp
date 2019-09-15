@@ -40,6 +40,9 @@ def InitUsageConfig():
 	config.usage.instantrec_path = ConfigText(default = "<default>")
 	config.usage.timeshift_path = ConfigText(default = "/media/hdd/")
 	config.usage.allowed_timeshift_paths = ConfigLocations(default = ["/media/hdd/"])
+	
+	config.usage.hide_number_markers = ConfigYesNo(default = False)
+	config.usage.hide_number_markers.addNotifier(refreshServiceList)
 
 	config.usage.on_movie_start = ConfigSelection(default = "ask", choices = [
 		("ask", _("Ask user")), ("resume", _("Resume from last position")), ("beginning", _("Start from the beginning")) ])
@@ -77,7 +80,11 @@ def InitUsageConfig():
 		nims.append( (str(x.slot), x.getSlotName()) )
 	config.usage.frontend_priority = ConfigSelection(default = "-1", choices = nims)
 
+	config.usage.service_icon_enable = ConfigYesNo(default = False)
+	config.usage.service_icon_enable.addNotifier(refreshServiceList)
+
 	config.usage.show_event_progress_in_servicelist = ConfigYesNo(default = False)
+	config.usage.show_event_progress_in_servicelist.addNotifier(refreshServiceList)
 
 	config.usage.blinking_display_clock_during_recording = ConfigYesNo(default = False)
 
@@ -326,4 +333,12 @@ def preferredInstantRecordPath():
 
 def defaultMoviePath():
 	return defaultRecordingLocation(config.usage.default_path.value)
+
+def refreshServiceList(configElement = None):
+	from Screens.InfoBar import InfoBar
+	InfoBarInstance = InfoBar.instance
+	if InfoBarInstance is not None:
+		servicelist = InfoBarInstance.servicelist
+		if servicelist:
+			servicelist.setMode()
 
