@@ -6,7 +6,7 @@ from os import path
 profile("LOAD:enigma_skin")
 from enigma import eSize, ePoint, gFont, eWindow, eLabel, ePixmap, eWindowStyleManager, \
 	addFont, gRGB, eWindowStyleSkinned
-from Components.config import ConfigSubsection, ConfigText, config
+from Components.config import ConfigSubsection, ConfigText, config, ConfigInteger
 from Components.Converter.Converter import Converter
 from Components.Sources.Source import Source, ObsoleteSource
 from Tools.Directories import resolveFilename, SCOPE_SKIN, SCOPE_SKIN_IMAGE, SCOPE_FONTS, SCOPE_CURRENT_SKIN, SCOPE_CONFIG, fileExists
@@ -56,11 +56,9 @@ def loadSkin(name, scope = SCOPE_SKIN):
 # so the first screen found will be used.
 
 # example: loadSkin("nemesis_greenline/skin.xml")
-from Components.SystemInfo import SystemInfo
-DEFAULT_SKIN = SystemInfo.get("DefaultFullHDSkin", False) and "Vu_HD_1080P/skin.xml" or "Vu_HD/skin.xml"
-
 config.skin = ConfigSubsection()
-config.skin.primary_skin = ConfigText(default = DEFAULT_SKIN)
+config.skin.primary_skin = ConfigText(default = "MX_Sline/skin.xml")
+config.skin.xres = ConfigInteger(default = 0)
 
 profile("LoadSkin")
 try:
@@ -384,6 +382,7 @@ def loadSingleSkinData(desktop, skin, path_prefix):
 				else:
 					bpp = 32
 				#print "Resolution:", xres,yres,bpp
+				config.skin.xres.value = xres
 				from enigma import gMainDC
 				gMainDC.getInstance().setResolution(xres, yres)
 				desktop.resize(eSize(xres, yres))
