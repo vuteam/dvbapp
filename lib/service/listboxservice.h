@@ -83,6 +83,8 @@ public:
 	
 	int getItemHeight() { return m_itemheight; }
 	void setItemHeight(int height);
+	void setHideNumberMarker(bool doHide);
+	static void setGetPiconNameFunc(SWIG_PYOBJECT(ePyObject) func);
 
 	enum {
 		markedForeground,
