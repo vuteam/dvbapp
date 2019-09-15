@@ -9,6 +9,7 @@
 class eListboxServiceContent: public virtual iListboxContent
 {
 	DECLARE_REF(eListboxServiceContent);
+	static ePyObject m_GetPiconNameFunc;
 public:
 	eListboxServiceContent();
 
@@ -105,6 +106,7 @@ protected:
 	int cursorMove(int count=1);
 	int cursorValid();
 	int cursorSet(int n);
+	int cursorResolve(int);
 	int cursorGet();
 
 	void cursorSave();
@@ -151,6 +153,7 @@ private:
 	eServiceReference m_is_playable_ignore;
 
 	int m_itemheight;
+	bool m_hide_number_marker;
 };
 
 #endif
